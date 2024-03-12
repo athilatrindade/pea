@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar {% endblock %}
+
+{% block 'conteudo' %}
+
+    
+
+    <br>
+    <br>
+    <br>
+    <div class="container"><!--Adicionei agr-->
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+        {% endif %}
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Erro de sistema
+            </div>
+        {% endif %}
+        <div class ="row">
+            <div class ="col-md-3">
+        
+            </div>
+            <div class ="col-md-6">
+                <form action="{% url 'valida_cad_consulta' %}" method="POST" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    
+                    
+                    <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+
+                    <label>Número</label>
+                    <input name ="numero" class="form-control" type="text" value="{{ codigo }}" readonly></label><br>
+                    <label>Data</label>
+                    <input name ="data" class="form-control" type="date" placeholder="Data de nascimento..."></label><br>
+                    <label>Receituário</label>
+                    <textarea name ="receituario" class="form-control" style="width: 540px; height: 150px;" placeholder="Receituário.."></textarea><br>                    
+                    <label>Relato</label>
+                    <textarea name ="relato" class="form-control" style="width: 540px; height: 150px;" placeholder="Relato"></textarea><br>
+                    
+                    
+                    <label>Atleta</label>
+                    <select name ="atleta" id="atleta" class="form-control">
+                        <option value="{{ atleta.id }}">{{ atleta.nome }}</option>
+                    </select><br>
+                    
+
+                    <label>Instrutor</label>
+                    <select name ="instrutor" id="instrutor" class="form-control">
+                        <option value="{{ instrutor_relacionado.id }}">{{ instrutor_relacionado.nome }}</option>
+                    </select><br>
+                   
+
+                    <br>
+                    <label>Sigilo</label>
+                    <input type="hidden" name="sigilo" value="False">
+                    <input name ="sigilo" type="checkbox" value="True"></label><br>
+                    
+
+                    
+                    <br><br>
+                    <input type="submit" class="btn btn-success" value="Gravar">
+                    <a href="{% url 'home_consulta' atleta.id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+
+                </form>
+
+            <br>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modalidades</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <form action="{% url 'valida_cadastro_modalidade' %}" method="POST" enctype='multipart/form-data'>
+                            {% csrf_token %}
+                           
+
+
+                            <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                            <label>Código</label>
+                            <input name ="codigo" class="form-control" type="text" placeholder="Código.."></label><br>
+                            
+                            <label>Nome</label>
+                            <input name ="nome" class="form-control" type="text" placeholder="Modalidade..."></label><br>
+
+                            <br><br>
+                            <input type="submit" class="btn btn-success" value="Gravar">
+                            
+
+            
+                        </form>
+
+
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+
+{% endblock %}

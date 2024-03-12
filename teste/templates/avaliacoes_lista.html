@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Lista de avaliações {% endblock %}
+
+{% block 'conteudo' %}
+
+    <style>
+        .body_2 {
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        .tela_login {
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 80px;
+        border-radius: 15px;
+        color: white;
+        }
+        .div_padrao {
+        background-color: rgba(248, 245, 245, 0.8);
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 80px;
+        border-radius: 15px;
+        color: rgb(5, 5, 5);
+        display: inline-block;
+        }
+        .input {
+        padding: 15px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        }
+        .botao {
+        background-color: dodgerblue;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        }
+        .botao:hover {
+        background-color: deepskyblue;
+        cursor: pointer;
+        }
+        .footer {
+        position: absolute;
+        }
+        .h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        .div-container {
+        display: flex;
+        justify-content: space-between;
+        }
+        .div-item {
+        flex: 1;
+        margin: 0 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        padding: 20px;
+        width: 600px;
+        }
+        .div-item img {
+        width: 100px;
+        height: 100px;
+        }
+        .titulo {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        }
+
+        .container-itens {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; 
+        gap: 20px; 
+        }
+
+        .item {
+        flex: 1; 
+        min-width: 250px; 
+        background-color: rgba(248, 245, 245, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        color: rgb(5, 5, 5);
+        margin: 10px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        }
+        .item img {
+        margin-bottom: 10px;
+        }
+        .list-group {
+            width: 100%;
+        }
+    
+       
+    </style>
+    <body>
+        <div class="container">
+            {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+            {% endif %}
+            
+            <br>
+            <br><br>
+            <div class="titulo">
+            <h1>Avaliações</h1>
+            </div>
+            <div class="container-itens">
+            <div class="item">
+                <a href="{% url 'home_angpopliteo' modalidades.id atleta.id teste_id %}"><img alt="Angulo Poplíteo" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Angulo Poplíteo</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_antropometria' modalidades.id atleta.id teste_id %}"><img alt="Antropometria" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Antropometria</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_compmembinf' modalidades.id atleta.id teste_id %}"><img alt="Compmembinf" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Compmembinf</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_condclinica' modalidades.id atleta.id teste_id %}"><img alt="Condclinica" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Condclinica</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_corrida' modalidades.id atleta.id teste_id %}"><img alt="Corrida" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Corrida</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_desvam' modalidades.id atleta.id teste_id %}"><img alt="Desvam" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Desvam</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_dorsiflexao' modalidades.id atleta.id teste_id %}"><img alt="Dorsiflexao" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Dorsiflexao</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_flexibilidade' modalidades.id atleta.id teste_id %}"><img alt="Flexibilidade" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Flexibilidade</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_fundtecnico' modalidades.id atleta.id teste_id %}"><img alt="Fundtecnico" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Fundtecnico</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_potmusmeminf' modalidades.id atleta.id teste_id %}"><img alt="Potmusmeminf" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Potmusmeminf</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_rast' modalidades.id atleta.id teste_id %}"><img alt="Rast" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Rast</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_runmatic' modalidades.id atleta.id teste_id %}"><img alt="Runmatic" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Runmatic</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testcadextensora' modalidades.id atleta.id teste_id %}"><img alt="Teste Cadeira extensora" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste cadeira extensora</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testey' modalidades.id atleta.id teste_id %}"><img alt="Teste Y" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste Y</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testmuscular' modalidades.id atleta.id teste_id %}"><img alt="Teste Muscular" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste muscular</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testober' modalidades.id atleta.id teste_id %}"><img alt="Teste de Ober" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste de ober</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testprogmaximo' modalidades.id atleta.id teste_id %}"><img alt="Testprogramaximo" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Testprogramaximo</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testquedapelvica' modalidades.id atleta.id teste_id %}"><img alt="Teste de queda pelvica" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste de queda pelvica</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testsalto' modalidades.id atleta.id teste_id %}"><img alt="Teste de salto" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste de salto</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'home_testthomas' modalidades.id atleta.id teste_id %}"><img alt="Teste de Thomas" width="100px" height="100px" src="{{ avaliacao_url.avaliacao_url }}"/></a>
+                <p>Teste de Thomas</p>
+            </div>
+            <div class="container">
+                <a href="{% url 'home_avaliacoes' modalidades.id atleta.id %}" button type="button" class="btn btn-warning">Voltar</button></a>
+            </div>
+            
+            <br><br>
+        </div>
+        <br>
+    </body>
+
+
+
+
+{% endblock %}

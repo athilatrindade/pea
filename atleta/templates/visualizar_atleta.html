@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Ver atleta {% endblock %}
+
+{% block 'conteudo' %}
+  <br>
+  <br>
+  <br>
+  <div class="container">
+
+    <h1>Atletas</h1>
+    
+    <br>
+    <div class="container">
+      <div class ="row">
+        <div class ="col-md-3">
+          
+          </div>
+            <div class ="col-md-6">
+              <form action="#" method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                
+
+                <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+                <label>Nome</label>
+                <input name ="nome" class="form-control" type="text" value="{{atleta.nome}}"></label><br>
+                <label>Data de nascimento</label>
+                <input name ="data_nasc" class="form-control" type="date" value="{{atleta.data_nasc}}"></label><br>
+                <label>CPF</label>
+                <input name ="cpf" class="form-control" type="text" value="{{atleta.cpf}}"></label><br>
+                <label>Sexo</label>
+                <input name ="sexo" class="form-control" type="text" value="{{atleta.sexo}}"></label><br>
+                <label>Celular</label>
+                <input name ="nome_org" class="form-control" type="text" value="{{atleta.celular}}"></label><br>
+                <label>Celular do responsável</label>
+                <input name ="cel_resp" class="form-control" type="text" value="{{atleta.cel_resp}}"></label><br>
+                <label>Grau de instrução</label>
+                <input name ="grau_instrucao" class="form-control" type="text" value="{{atleta.grau_instrucao}}"></label><br>
+                <label>Origem escolar</label>
+                <input name ="origem_escolar" class="form-control" type="text" value="{{atleta.origem_escolar}}"></label><br>
+                <label>Modalidade do atleta</label>
+                <input name ="modalidade_atleta" class="form-control" type="text" value="{{atleta.modalidade_atleta}}"></label><br>
+                
+                <br><br>
+                <input type="submit" class="btn btn-success" value="Gravar">
+                <a href="#" button type="button" class="btn btn-warning">Sair</button></a>
+
+  
+              </form>
+            </div>    
+          </div>
+        </div>  
+      </div>
+    </div>
+    <br>
+  </div>
+{% endblock %}

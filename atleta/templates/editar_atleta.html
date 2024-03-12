@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Editar atleta {% endblock %}
+
+{% block 'conteudo' %}
+
+    <br>
+    <br>
+    
+    <br>
+    <div class="container">
+        {% if status == '2' %}
+            <div class="alert alert-success" role="alert">
+                Editado com sucesso.
+            </div>
+        {% endif %}
+        {% if status == '3' %}
+            <div class="alert alert-success" role="alert">
+                Existe um atleta com esse CPF.
+            </div>
+        {% endif %}
+        
+        {% if status == '5' %}
+            <div class="alert alert-success" role="alert">
+                CPF inválido.
+            </div>
+        {% endif %}
+        
+        <h1>Editar atleta</h1>
+        <div class ="row">
+            <div class ="col-md-3">
+            
+            </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_edicao_atleta' atleta.id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        
+
+
+                        <input type="hidden" value="{{atleta.id}}" name="atleta_id">
+                        <label>Nome</label>
+                        <input name ="nome" class="form-control" type="text" value="{{atleta.nome}}"></label><br>
+                        <label>Data de nascimento</label>
+                        <input name ="data_nasc" class="form-control" type="date" value="{{atleta.data_nasc|date:'Y-m-d'}}"></label><br>
+                        <label>CPF</label>
+                        <input name ="cpf" class="form-control" type="text" value="{{atleta.cpf}}"></label><br>
+                        <label>Sexo</label>
+                        <input name ="sexo" class="form-control" type="text" value="{{atleta.sexo}}"></label><br>
+                        <label>Celular</label>
+                        <input name ="celular" class="form-control" type="text" value="{{atleta.celular}}"></label><br>
+                        <label>Celular do responsável</label>
+                        <input name ="cel_resp" class="form-control" type="text" value="{{atleta.cel_resp}}"></label><br>
+                        <label>Grau de instrução</label>
+                        <input name ="grau_instrucao" class="form-control" type="text" value="{{atleta.grau_instrucao}}"></label><br>
+                        <label>Origem escolar</label>
+                        <input name ="origem_escolar" class="form-control" type="text" value="{{atleta.origem_escolar}}"></label><br>
+                        
+                        
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="/atleta/lista/" button type="button" class="btn btn-warning">Sair</button></a>
+
+        
+                    </form>
+
+                    <br>
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+    <br>
+
+
+{% endblock %}

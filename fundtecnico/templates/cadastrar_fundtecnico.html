@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar fundtecnico {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_fundtecnico' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Controle_1 (n° de controle)</label>
+                        <input name="controle_1" class="form-control" type="text" placeholder="controle_1..."></label><br>
+                        
+                        <label>Controle_2 (n° de controle)</label>
+                        <input name="controle_2" class="form-control" type="text" placeholder="controle_2..."></label><br>
+                        
+                        <label>Controle_3 (n° de controle)</label>
+                        <input name="controle_3" class="form-control" type="text" placeholder="controle_3..."></label><br>
+                        
+
+                        <label>Passe_1 (n° de passes)</label>
+                        <input name="passe_1" class="form-control" type="text" placeholder="passe_1..."></label><br>
+                        
+                        <label>Passe_2 (n° de passes)</label>
+                        <input name="passe_2" class="form-control" type="text" placeholder="passe_2..."></label><br>
+                        
+                        
+                        <label>Passe_3 (n° de passes)</label>
+                        <input name="passe_3" class="form-control" type="text" placeholder="passe_3..."></label><br>
+                        
+                        <label>Conducao_1 (segundos gastos)</label>
+                        <input name="conducao_1" class="form-control" type="text" placeholder="conducao_1..."></label><br>
+                        
+                        <label>Conducao_2 (segundos gastos)</label>
+                        <input name="conducao_2" class="form-control" type="text" placeholder="conducao_2..."></label><br>
+                        
+                        <label>Conducao_3 (segundos gastos)</label>
+                        <input name="conducao_3" class="form-control" type="text" placeholder="conducao_3..."></label><br>
+                        
+                        <label>Chute_1 (pontuação)</label>
+                        <input name="chute_1" class="form-control" type="text" placeholder="chute_1..."></label><br>
+                        
+                        <label>Chute_2 (pontuação)</label>
+                        <input name="chute_2" class="form-control" type="text" placeholder="chute_2..."></label><br>
+                        
+                        <label>Chute_3 (pontuação)</label>
+                        <input name="chute_3" class="form-control" type="text" placeholder="chute_3..."></label><br>
+                        
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_fundtecnico' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

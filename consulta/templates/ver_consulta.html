@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Ver consulta {% endblock %}
+
+{% block 'conteudo' %}
+
+    
+
+    <br>
+    <br>
+    <br>
+    <div class="container"><!--Adicionei agr-->
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+        {% endif %}
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Erro de sistema
+            </div>
+        {% endif %}
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Você não tem permissão para editar esta consulta.
+            </div>
+        {% endif %}
+        {% if status == '3' %}
+            <div class="alert alert-success" role="alert">
+                Edição realizada com sucesso.
+            </div>
+        {% endif %}
+        {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Edição não realizada.
+            </div>
+        {% endif %}
+        <div class ="row">
+            <div class ="col-md-3">
+        
+            </div>
+            <div class ="col-md-6">
+                <form action="{% url 'valida_cad_consulta' %}" method="POST" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    
+                    
+                    <input type="hidden" value="{{consulta.id}}" name="consulta_id">
+                    
+                    <label>Número</label>
+                    <input name ="numero" class="form-control" type="text" value="{{consulta.numero}}" readonly ></label><br>
+                    <label>Data</label>
+                    <input name ="data" class="form-control" type="date" value="{{consulta.data|date:'Y-m-d' }}" readonly></label><br>
+                    <label>Receituário</label>
+                    <textarea name ="receituario" class="form-control" style="width: 540px; height: 150px;" readonly>{{consulta.receituario}}</textarea><br>                    
+                    <label>Relato</label>
+                    <textarea name ="relato" class="form-control" style="width: 540px; height: 150px;" readonly>{{consulta.relato}}</textarea><br>
+                    
+                    
+                    <label>Atleta</label>
+                    <select name ="atleta" id="atleta" class="form-control">
+                        <option value="{{ atleta.id }}" readonly>{{ atleta.nome }}</option>
+                    </select><br>
+                    
+                    
+                    <label>Instrutor</label>
+                    <select name ="instrutor" id="instrutor" class="form-control">
+                        <option value="{{ instrutor_relacionado.id }}" readonly>{{ instrutor_relacionado.nome }}</option>
+                    </select><br>
+                   
+                    {% if consulta.sigilo == True %}
+                        <input type="hidden" name="sigilo" value="True" readonly>
+                    {% else %}
+                        <input type="hidden" name="sigilo" value="False" readonly>
+                    {% endif %}
+                    
+
+                    
+                    <br>
+                    <a href="{% url 'editar_consulta' atleta.id consulta.id %}" button type="button" class="btn btn-info">Editar</button></a>
+                    <a href="{% url 'historico_consulta' atleta.id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+
+                </form>
+
+                <br>
+            </div>
+            <br>
+        </div>
+        <br>
+</div>
+
+{% endblock %}

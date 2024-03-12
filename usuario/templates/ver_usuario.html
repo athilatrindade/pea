@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar {% endblock %}
+
+{% block 'conteudo' %}
+
+    <br>
+    <br>
+    <h1>Visualizar atleta</h1>
+    <br>
+    <div class="container">
+        <div class ="row">
+            <div class ="col-md-3">
+            
+            </div>
+                <div class ="col-md-6">
+                    <form action="#" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        
+                        <input type="hidden" value="{{organizacao.id}}" name="id_organizacao">
+                        <label>Nome</label>
+                        <input name ="nome" class="form-control" type="text" placeholder="Nome do atleta..."></label><br>
+                        <label>Data de nascimento</label>
+                        <input name ="data_nasc" class="form-control" type="date" placeholder="Data de nascimento..."></label><br>
+                        <label>CPF</label>
+                        <input name ="cpf" class="form-control" type="text" placeholder="CPF.."></label><br>
+                        <label>Sexo</label>
+                        <input name ="sexo" class="form-control" type="text" placeholder="Sexo..."></label><br>
+                        <label>Celular</label>
+                        <input name ="nome_org" class="form-control" type="text" placeholder="Celular..."></label><br>
+                        <label>Celular do responsável</label>
+                        <input name ="cel_resp" class="form-control" type="text" placeholder="Celular do responsável..."></label><br>
+                        <label>Grau de instrução</label>
+                        <input name ="grau_instrucao" class="form-control" type="text" placeholder="Grau de instrução..."></label><br>
+                        <label>Origem escolar</label>
+                        <input name ="origem_escolar" class="form-control" type="text" placeholder="Origem escolar..."></label><br>
+                        <label>Modalidade do atleta</label>
+                        <input name ="modalidade_atleta" class="form-control" type="text" placeholder="Modalidade do atleta..."></label><br>
+                        
+                        <br><br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="#" button type="button" class="btn btn-warning">Sair</button></a>
+
+        
+                    </form>
+
+
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+    <br>
+
+
+{% endblock %}

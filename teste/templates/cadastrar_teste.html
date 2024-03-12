@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar Teste {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+            <h1> Teste de {{atleta.nome}}</h1>
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_teste' modalidades.id atleta.id %}"  method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Código</label>
+                        <input name ="codigo" class="form-control" type="text" value="{{ codigo }}" readonly></label><br>
+                        <label>Data</label>
+                        <input name ="data" class="form-control" type="date" placeholder="Data..."></label><br>
+                        <label>Instrutor</label>
+                        <select name ="instrutor" id="instrutor" class="form-control">
+                            <option value="{{ instrutor_relacionado.id }}">{{ instrutor_relacionado.nome }}</option>
+                        </select><br>
+                        <label>Atleta</label>
+                        <select name ="atleta" id="atleta" class="form-control">
+                            <option value="{{ atleta.id }}">{{ atleta.nome }}</option>
+                        </select><br>
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar e continuar">
+                        <a href="{% url 'home_avaliacoes' modalidades.id atleta.id %}"button type="button" class="btn btn-warning">Voltar</button></a>
+
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

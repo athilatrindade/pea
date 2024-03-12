@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar runmatic {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_runmatic' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Tcontatoesq (segundos)</label>
+                        <input name="tcontatoesq" class="form-control" type="text" placeholder="tcontatoesq..."></label><br>
+                        
+                        <label>Tcontatodir (segundos)</label>
+                        <input name="tcontatodir" class="form-control" type="text" placeholder="tcontatodir..."></label><br>
+                        
+                        <label>Tvooesq  (segundos)</label>
+                        <input name="tvooesq" class="form-control" type="text" placeholder="tvooesq..."></label><br>
+                        
+
+                        <label>Tvoodir (segundos)</label>
+                        <input name="tvoodir" class="form-control" type="text" placeholder="tvoodir..."></label><br>
+                        
+                        <label>Freqpassadaesq (hertz)</label>
+                        <input name="freqpassadaesq" class="form-control" type="text" placeholder="freqpassadaesq..."></label><br>
+                        
+                        
+                        <label>Freqpassadadir (hertz)</label>
+                        <input name="freqpassadadir" class="form-control" type="text" placeholder="freqpassadadir..."></label><br>
+                        
+                        <label>Osverticalesq (metros)</label>
+                        <input name="osverticalesq" class="form-control" type="text" placeholder="osverticalesq..."></label><br>
+                        
+                        <label>Osverticaldir (metros)</label>
+                        <input name="osverticaldir" class="form-control" type="text" placeholder="osverticaldir..."></label><br>
+                        
+                        <label>Stifnessesq (Kilonewtons/metro)</label>
+                        <input name="stifnessesq" class="form-control" type="text" placeholder="stifnessesq..."></label><br>
+                        
+                        <label>Stifnessdir (Kilonewtons/metro)</label>
+                        <input name="stifnessdir" class="form-control" type="text" placeholder="stifnessdir..."></label><br>
+                        
+                        <label>Fmaximaesq (watts/Kg)</label>
+                        <input name="fmaximaesq" class="form-control" type="text" placeholder="fmaximaesq..."></label><br>
+                        
+                        <label>Fmaximadir (watts/Kg)</label>
+                        <input name="fmaximadir" class="form-control" type="text" placeholder="fmaximadir..."></label><br>
+                        
+
+
+
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_runmatic' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

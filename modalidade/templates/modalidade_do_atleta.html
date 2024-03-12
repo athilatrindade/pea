@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Modalidade do atleta {% endblock %}
+
+{% block 'conteudo' %}
+
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+        {% endif %}
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Erro de sistema
+            </div>
+        {% endif %}
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Erro de sistema
+            </div>
+        {% endif %}
+        {% if status == '3' %}
+            <div class="alert alert-danger" role="alert">
+                Já existe uma modalidade com esse código
+            </div>
+        {% endif %}
+        {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Já existe uma modalidade com esse nome
+            </div>
+        {% endif %}
+        <div class ="row">
+            <div class ="col-md-3">
+            
+            </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_adicionar_modalidade' modalidade.id atleta.id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        
+                        <input type="hidden" value="{{atleta.id}}" name="atleta_id">
+
+                        <label>Nome do atleta</label>
+                        <input name ="nome" class="form-control" type="text" value="{{atleta.nome}}" readonly></label><br>
+                        
+                        <label>Modalidades</label>
+                        {% for modalidade in modalidades %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="modalidades" value="{{ modalidade.id }}" {% if modalidade.id in modalidades_vinculadas %}checked{% endif %}>
+                            <label class="form-check-label">{{ modalidade.nome }}</label>
+                        </div>
+                        {% endfor %}
+
+                        <br><br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'lista_atletas' modalidade.id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+        
+                    </form>
+
+
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+    <br>
+
+
+{% endblock %}

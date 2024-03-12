@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Selecionar avaliação  {% endblock %}
+
+{% block 'conteudo' %}
+
+    <style>
+        .body_2 {
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        .tela_login {
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 80px;
+        border-radius: 15px;
+        color: white;
+        }
+        .div_padrao {
+        background-color: rgba(248, 245, 245, 0.8);
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 80px;
+        border-radius: 15px;
+        color: rgb(5, 5, 5);
+        display: inline-block;
+        }
+        .input {
+        padding: 15px;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        }
+        .botao {
+        background-color: dodgerblue;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+        }
+        .botao:hover {
+        background-color: deepskyblue;
+        cursor: pointer;
+        }
+        .footer {
+        position: absolute;
+        }
+        .h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        }
+        .div-container {
+        display: flex;
+        justify-content: space-between;
+        }
+        .div-item {
+        flex: 1;
+        margin: 0 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        padding: 20px;
+        }
+        .div-item img {
+        width: 100px;
+        height: 100px;
+        }
+        .titulo {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        }
+
+        .container-itens {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 20px; 
+        }
+
+        .item {
+        flex: 1; 
+        min-width: 250px;
+        background-color: rgba(248, 245, 245, 0.8);
+        padding: 20px;
+        border-radius: 15px;
+        color: rgb(5, 5, 5);
+        margin: 10px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+        .item img {
+        margin-bottom: 10px;
+        }
+    </style>
+    <body>
+        <div class="container">
+            {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+            {% endif %}
+            
+            <br>
+            <br><br>
+            <div class="titulo">
+            <h1>Avaliação - {{atleta.nome}} - {{modalidade.nome}}</h1>
+            </div>
+            <div class="container-itens">
+            
+            <div class="item">
+                <a href="{% url 'cadastrar_teste' modalidade.id atleta.id %}"><img alt="Cadastrar teste" width="100px" height="100px" src="{{ cadastro_teste_url }}"/></a>
+                <p>Cadastrar Teste</p>
+            </div>
+            <div class="item">
+                <a href="{% url 'historico_avaliacoes' atleta.id %}?modalidade_id={{ modalidade.id }}"><img alt="Histórico de avaliações" width="100px" height="100px" src="{{ historico_avaliacao_url }}"/></a>
+                <p>Histórico de avaliações</p>
+            </div>
+            
+            <br>
+            <div class="container">
+                <a href="{% url 'busca_modalidade' modalidade.id %}" button type="button" class="btn btn-warning">Voltar</button></a>
+            </div>
+            <br><br>
+        </div>
+    </body>
+
+{% endblock %}

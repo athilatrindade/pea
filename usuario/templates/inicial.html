@@ -1,0 +1,161 @@
+
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Home {% endblock %}
+
+{% block 'conteudo' %}
+  <br>
+  <br>
+
+  <style>
+    .body_2 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .tela_login {
+      background-color: rgba(0, 0, 0, 0.8);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 80px;
+      border-radius: 15px;
+      color: white;
+    }
+    .div_padrao {
+      background-color: rgba(248, 245, 245, 0.8);
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 80px;
+      border-radius: 15px;
+      color: rgb(5, 5, 5);
+      display: inline-block;
+    }
+    .input {
+      padding: 15px;
+      border: none;
+      outline: none;
+      font-size: 15px;
+    }
+    .botao {
+      background-color: dodgerblue;
+      border: none;
+      padding: 15px;
+      width: 100%;
+      border-radius: 10px;
+      color: white;
+      font-size: 15px;
+    }
+    .botao:hover {
+      background-color: deepskyblue;
+      cursor: pointer;
+    }
+    .footer {
+      position: absolute;
+    }
+    .h1 {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .div-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .div-item {
+      flex: 1;
+      margin: 0 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      padding: 20px;
+    }
+    .div-item img {
+      width: 100px;
+      height: 100px;
+    }
+    .titulo {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .container-itens {
+      display: flex;
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 20px;
+    }
+
+    .item {
+      flex: 1; 
+      min-width: 250px; 
+      background-color: rgba(248, 245, 245, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      color: rgb(5, 5, 5);
+      margin: 10px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+    }
+    .item img {
+    margin-bottom: 10px;
+    }
+  </style>
+
+  <div class="container">
+    {% if status == '0' %}
+      <div class="alert alert-success" role="alert">
+        Cadastro realizado com sucesso.
+      </div>
+    {% endif %}
+    
+    <br>
+    <br>
+    <div class="titulo">
+      <h1>PRONTUÁRIO ELETRÔNICO DO ATLETA</h1>
+    </div>
+    <div class="container-itens">
+      <div class="item">
+        <a href="/atleta/lista/"><img alt="Atleta" width="100px" height="100px" src="{{ atleta_url }}"/></a>
+        <p>Atletas</p>
+      </div>
+      <div class="item">
+        <a href="/instrutor/lista/"><img alt="Instrutor" width="100px" height="100px" src="{{ instrutor_url }}"/></a>
+        <p>Instrutores</p>
+      </div>
+      <div class="item">
+        <a href="/modalidade/lista/"><img alt="Modalidade" width="100px" height="100px" src="{{ modalidade_url }}"/></a>
+        <p>Modalidades</p>
+      </div>
+      <div class="item">
+        <a href="/instrutor/lista_perfis/"><img alt="Perfil" width="100px" height="100px" src="{{ perfil_url }}"/></a>
+        <p>Perfis</p>
+      </div>
+      {% if usuario_admin %}
+        <div class="item">
+          <a href="/usuario/lista/"><img alt="Usuário" width="100px" height="100px" src="{{ usuario_url }}"/></a>
+          <p>Usuários</p>
+        </div>
+      {% endif %}
+      <div class="item">
+        <a href="{% url 'editar_meu_cad' usuario_id %}"><img alt="Editar usuário" width="100px" height="100px" src="{{ editar_usuario_url }}"/></a>
+        <p>Meu usuário</p>
+      </div>
+      <div class="item">
+        <a href="{% url 'busca_atleta_consulta' %}"><img alt="Consultas" width="100px" height="100px" src="{{ consultas_url }}"/></a>
+        <p>Consultas</p>
+      </div>
+      <div class="item">
+        <a href="{% url 'home_teste' %}"><img alt="Consultas" width="100px" height="100px" src="{{ teste_url }}"/></a>
+        <p>Testes</p>
+      </div>
+      <div class="item">
+        <a href="{% url 'periodo_painel' %}"><img alt="Consultas" width="100px" height="100px" src="{{ painel_url }}"/></a>
+        <p>Painel</p>
+      </div>
+    </div>
+    <br><br>
+  </div>
+
+{% endblock %}

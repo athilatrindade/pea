@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar Teste Y {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_testey' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Anterior_direito_1</label>
+                        <input name="anterior_direito_1" class="form-control" type="text" placeholder="anterior_direito_1..."></label><br>
+                        
+                        <label>Anterior_direito_2</label>
+                        <input name="anterior_direito_2" class="form-control" type="text" placeholder="anterior_direito_2..."></label><br>
+
+                        <label>Anterior_direito_3</label>
+                        <input name="anterior_direito_3" class="form-control" type="text" placeholder="anterior_direito_3..."></label><br>
+
+                        <label>Anterior_esquerdo_1</label>
+                        <input name="anterior_esquerdo_1" class="form-control" type="text" placeholder="anterior_esquerdo_1..."></label><br>
+
+                        <label>Anterior_esquerdo_2</label>
+                        <input name="anterior_esquerdo_2" class="form-control" type="text" placeholder="anterior_esquerdo_2..."></label><br>
+
+                        <label>Anterior_esquerdo_3</label>
+                        <input name="anterior_esquerdo_3" class="form-control" type="text" placeholder="anterior_esquerdo_3..."></label><br>
+
+                        <label>Postero_medial_dir_1</label>
+                        <input name="postero_medial_dir_1" class="form-control" type="text" placeholder="postero_medial_dir_1..."></label><br>
+
+                        <label>Postero_medial_dir_2</label>
+                        <input name="postero_medial_dir_2" class="form-control" type="text" placeholder="postero_medial_dir_2..."></label><br>
+
+                        <label>Postero_medial_dir_3</label>
+                        <input name="postero_medial_dir_3" class="form-control" type="text" placeholder="postero_medial_dir_3..."></label><br>
+
+                        <label>Postero_medial_esq_1</label>
+                        <input name="postero_medial_esq_1" class="form-control" type="text" placeholder="postero_medial_esq_1..."></label><br>
+
+                        <label>Postero_medial_esq_2</label>
+                        <input name="postero_medial_esq_2" class="form-control" type="text" placeholder="postero_medial_esq_2..."></label><br>
+
+                        <label>Postero_medial_esq_3</label>
+                        <input name="postero_medial_esq_3" class="form-control" type="text" placeholder="postero_medial_esq_3..."></label><br>
+
+                        <label>Postero_lat_esq_1</label>
+                        <input name="postero_lat_esq_1" class="form-control" type="text" placeholder="postero_lat_esq_1..."></label><br>
+
+                        <label>Postero_lat_esq_2</label>
+                        <input name="postero_lat_esq_2" class="form-control" type="text" placeholder="postero_lat_esq_2..."></label><br>
+
+                        <label>Postero_lat_esq_3</label>
+                        <input name="postero_lat_esq_3" class="form-control" type="text" placeholder="postero_lat_esq_3..."></label><br>
+
+                        <label>Postero_lat_dir_1</label>
+                        <input name="postero_lat_dir_1" class="form-control" type="text" placeholder="postero_lat_dir_1..."></label><br>
+
+                        <label>Postero_lat_dir_2</label>
+                        <input name="postero_lat_dir_2" class="form-control" type="text" placeholder="postero_lat_dir_2..."></label><br>
+
+                        <label>Postero_lat_dir_3</label>
+                        <input name="postero_lat_dir_3" class="form-control" type="text" placeholder="postero_lat_dir_3..."></label><br>
+
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_testey' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

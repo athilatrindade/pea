@@ -1,0 +1,622 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Ver Teste {% endblock %}
+
+{% block 'conteudo' %}
+    {% if status == '0' %}
+        <div class="alert alert-success" role="alert">
+            Teste gravado com sucesso.
+        </div>
+    {% endif %}
+
+    {% if status == '1' %}
+        <div class="alert alert-danger" role="alert">
+            Erro ao gravar teste
+        </div>
+    {% endif %}
+
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true">Informações do Teste</a>
+            </li>
+            {% for teste in angpopliteo_avaliacoes %}
+                <li class="nav-item">
+                <a class="nav-link" id="angpopliteo-tab" data-toggle="tab" href="#angpopliteo" role="tab" aria-controls="angpopliteo" aria-selected="false">Angpopliteo</a>
+            </li>
+            {% endfor %}
+            
+            {% for teste in antropometria_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="antropometria-tab" data-toggle="tab" href="#antropometria" role="tab" aria-controls="antropometria" aria-selected="false">Antropometria</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in calculoantropometria_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="calculo_antropometria-tab" data-toggle="tab" href="#calculo_antropometria" role="tab" aria-controls="calculo_antropometria" aria-selected="false">Antropometria Cálculos</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in compmembinf_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="compmembinf-tab" data-toggle="tab" href="#compmembinf" role="tab" aria-controls="antropometria" aria-selected="false">Compmembinf</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in condclinica_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="condclinica-tab" data-toggle="tab" href="#condclinica" role="tab" aria-controls="antropometria" aria-selected="false">Condclinica</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in corrida_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="corrida-tab" data-toggle="tab" href="#corrida" role="tab" aria-controls="antropometria" aria-selected="false">Corrida</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in desvam_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="desvam-tab" data-toggle="tab" href="#desvam" role="tab" aria-controls="antropometria" aria-selected="false">Desvam</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in desempenhodesvam_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="desempenhodesvam-tab" data-toggle="tab" href="#desempenhodesvam" role="tab" aria-controls="antropometria" aria-selected="false">Desvam Cálculos</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in dorsiflexao_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="dorsiflexao-tab" data-toggle="tab" href="#dorsiflexao" role="tab" aria-controls="antropometria" aria-selected="false">Dorsiflexao</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in flexibilidade_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="flexibilidade-tab" data-toggle="tab" href="#flexibilidade" role="tab" aria-controls="antropometria" aria-selected="false">Flexibilidade</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in maiorwellsflexibilidade_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="maiorwellsflexibilidade-tab" data-toggle="tab" href="#maiorwellsflexibilidade" role="tab" aria-controls="antropometria" aria-selected="false">Flexibilidade Maior valor</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in fundtecnico_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="fundtecnico-tab" data-toggle="tab" href="#fundtecnico" role="tab" aria-controls="antropometria" aria-selected="false">Fundtecnico</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in potmusmeinf_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="potmusmeinf-tab" data-toggle="tab" href="#potmusmeinf" role="tab" aria-controls="antropometria" aria-selected="false">Potmusmeminf</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in calculospotmusmeminf_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="calculospotmusmeminf-tab" data-toggle="tab" href="#calculospotmusmeminf" role="tab" aria-controls="antropometria" aria-selected="false">Potmusmeminf Cálculos</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in rast_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="rast-tab" data-toggle="tab" href="#rast" role="tab" aria-controls="antropometria" aria-selected="false">Rast</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in calculorast_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="calculorast-tab" data-toggle="tab" href="#calculorast" role="tab" aria-controls="antropometria" aria-selected="false">Rast Cálculos</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in runmatic_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="runmatic-tab" data-toggle="tab" href="#runmatic" role="tab" aria-controls="antropometria" aria-selected="false">Runmatic</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in assimetriarunmatic_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="assimetriarunmatic-tab" data-toggle="tab" href="#assimetriarunmatic" role="tab" aria-controls="antropometria" aria-selected="false">Runmatic Assimetria</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testcadextensora_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testcadextensora-tab" data-toggle="tab" href="#testcadextensora" role="tab" aria-controls="antropometria" aria-selected="false">Testcadextensora</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testey_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testey-tab" data-toggle="tab" href="#testey" role="tab" aria-controls="antropometria" aria-selected="false">Teste Y</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testmuscular_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testmuscular-tab" data-toggle="tab" href="#testmuscular" role="tab" aria-controls="antropometria" aria-selected="false">Teste Muscular</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testober_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testober-tab" data-toggle="tab" href="#testober" role="tab" aria-controls="antropometria" aria-selected="false">Teste de Ober</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testprogmaximo_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testprogmaximo-tab" data-toggle="tab" href="#testprogmaximo" role="tab" aria-controls="antropometria" aria-selected="false">Testprogmaximo</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testquedapelvica_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testquedapelvica-tab" data-toggle="tab" href="#testquedapelvica" role="tab" aria-controls="antropometria" aria-selected="false">Teste Queda Pelvica</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testsalto_avaliacoes %}
+                <li class="nav-item">
+                    <a class="nav-link" id="testsalto-tab" data-toggle="tab" href="#testsalto" role="tab" aria-controls="antropometria" aria-selected="false">Teste do Salto</a>
+                </li>
+            {% endfor %}
+
+            {% for teste in testthomas_avaliacoes %}
+            <li class="nav-item">
+                <a class="nav-link" id="testthomas-tab" data-toggle="tab" href="#testthomas" role="tab" aria-controls="antropometria" aria-selected="false">Teste Thomas</a>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                
+                <h2>Informações do Teste</h2>
+                
+                <p>Código: {{ testes.codigo }}</p>
+                <p>Data: {{ testes.data }}</p>
+                <p>Instrutor: {{ instrutor_relacionado.nome }}</p>
+                <p>Atleta: {{ atleta.nome }}</p>
+            </div>
+            
+            <div class="tab-pane fade" id="angpopliteo" role="tabpanel" aria-labelledby="angpopliteo-tab">
+                {% for teste in angpopliteo_avaliacoes %}
+   
+                    <h2>Angpopliteo</h2>
+                    
+                    <p>Direito: {{ teste.direito }}</p>
+                    <p>Esquerdo: {{ teste.esquerdo }}</p>
+                {% endfor %}
+            </div>
+            
+            <div class="tab-pane fade" id="antropometria" role="tabpanel" aria-labelledby="antropometria-tab">
+
+                {% for teste in antropometria_avaliacoes %}    
+                <h2>Antropometria</h2>
+
+                <p>massacorporal: {{ teste.massacorporal }}</p>
+                <p>altura: {{ teste.altura }}</p>
+                <p>dctriceps: {{ teste.dctriceps }}</p>
+                <p>dcabdominal: {{ teste.dcabdominal }}</p>
+                <p>dcpanturrilha: {{ teste.dcpanturrilha }}</p>
+                <p>dcsubescapular: {{ teste.dcsubescapular }}</p>
+                <p>circcoxamedial: {{ teste.circcoxamedial }}</p>
+                <p>circpanturmedial: {{ teste.circpanturmedial }}</p>
+                <p>dcbiceps: {{ teste.dcbiceps }}</p>
+                <p>dcpeitoral: {{ teste.dcpeitoral }}</p>
+                <p>dccoxamedial: {{ teste.dccoxamedial }}</p>
+                <p>dcsuprailiaca: {{ teste.dcsuprailiaca }}</p>
+                <p>dccoxaproximal: {{ teste.dccoxaproximal }}</p>
+                <p>dcmedioaxilar: {{ teste.dcmedioaxilar }}</p>
+
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="calculo_antropometria" role="tabpanel" aria-labelledby="calculo_antropometria-tab">
+
+                {% for teste in calculoantropometria_avaliacoes %}    
+                <h2>Antropometria Cálculos</h2>
+
+                <p>soma nove dobras: {{ teste.somanovedobras }}</p>
+                <p>soma sete dobras: {{ teste.somasetedobras }}</p>
+                <p>densidade corporal: {{ teste.densicorporal }}</p>
+                <p>percentual de gordura: {{ teste.percgordura }}</p>
+                <p>IMC: {{ teste.imc }}</p>
+                <p>Gordura Corporal: {{ teste.gordcorporal }}</p>
+                <p>Massa Magra: {{ teste.massamagra }}</p>
+                
+
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="compmembinf" role="tabpanel" aria-labelledby="compmembinf-tab">
+                
+               {% for teste in compmembinf_avaliacoes %}
+                    <h2>Compmembinf</h2>
+
+                    <p>Direito: {{ teste.direito }}</p>
+                    <p>Esquerdo: {{ teste.esquerdo }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="condclinica" role="tabpanel" aria-labelledby="condclinica-tab">
+                
+                {% for teste in condclinica_avaliacoes %}
+
+                    <h2>Condclinica</h2>
+
+                    <p>Descrição: {{ teste.descricao }}</p>
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="corrida" role="tabpanel" aria-labelledby="corrida-tab">
+                
+                {% for teste in corrida_avaliacoes %}
+ 
+                    <h2>Corrida</h2>
+
+                    <p>tr: {{ teste.tr }}</p>
+                    <p>c20m: {{ teste.c20m }}</p>
+                    <p>muddirecao: {{ teste.muddirecao }}</p>
+                    <p>c10m: {{ teste.c10m }}</p>
+                    <p>c30m: {{ teste.c30m }}</p>
+                    <p>vift: {{ teste.vift }}</p>
+
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="desvam" role="tabpanel" aria-labelledby="desvam-tab">
+                
+                {% for teste in desvam_avaliacoes %}
+
+                    <h2>Desvam</h2>
+
+
+                    <p>c2km: {{ teste.c2km }}</p>
+                    <p>c3km: {{ teste.c3km }}</p>
+                    <p>muddirecao: {{ teste.muddirecao }}</p>
+                    <p>vam: {{ teste.vam }}</p>
+                
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="desempenhodesvam" role="tabpanel" aria-labelledby="desempenhodesvam-tab">
+                
+                {% for teste in desempenhodesvam_avaliacoes %}
+
+                    <h2>Desvam Cálculos</h2>
+
+
+                    <p>vam 2km: {{ teste.vam_2km }}</p>
+                    <p>vam 3km: {{ teste.vam_3km }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="dorsiflexao" role="tabpanel" aria-labelledby="dorsiflexao-tab">
+                
+                {% for teste in dorsiflexao_avaliacoes %}
+
+                    <h2>Dorsiflexao</h2>
+
+
+                    <p>ec: {{ teste.ec }}</p>
+                    <p>dg: {{ teste.dg }}</p>
+                    <p>eg: {{ teste.eg }}</p>
+                    <p>dc: {{ teste.dc }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="flexibilidade" role="tabpanel" aria-labelledby="flexibilidade-tab">
+                
+                {% for teste in flexibilidade_avaliacoes %}
+
+                    <h2>Flexibilidade</h2>
+
+
+                    <p>wells_1: {{ teste.wells_1 }}</p>
+                    <p>wells_2: {{ teste.wells_2 }}</p>
+                    <p>wells_3: {{ teste.wells_3 }}</p>
+                
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="maiorwellsflexibilidade" role="tabpanel" aria-labelledby="maiorwellsflexibilidade-tab">
+                
+                {% for teste in maiorwellsflexibilidade_avaliacoes %}
+
+                    <h2>Flexibilidade (maior valor)</h2>
+
+
+                    <p>Maior valor: {{ teste.maiorwells }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="fundtecnico" role="tabpanel" aria-labelledby="fundtecnico-tab">
+                
+                {% for teste in fundtecnico_avaliacoes %}
+
+                    <h2>Fundtecnico</h2>
+
+                    <p>controle_1: {{ teste.controle_1 }}</p>
+                    <p>controle_2: {{ teste.controle_2 }}</p>
+                    <p>controle_3: {{ teste.controle_3 }}</p>
+                    <p>passe_1: {{ teste.passe_1 }}</p>
+                    <p>passe_2: {{ teste.passe_2 }}</p>
+                    <p>passe_3: {{ teste.passe_3 }}</p>
+                    <p>conducao_1: {{ teste.conducao_1 }}</p>
+                    <p>conducao_2: {{ teste.conducao_2 }}</p>
+                    <p>conducao_3: {{ teste.conducao_3 }}</p>
+                    <p>chute_1: {{ teste.chute_1 }}</p>
+                    <p>chute_2: {{ teste.chute_2 }}</p>
+                    <p>chute_3: {{ teste.chute_3 }}</p>
+
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="potmusmeinf" role="tabpanel" aria-labelledby="potmusmeinf-tab">
+                
+                {% for teste in potmusmeinf_avaliacoes %}
+
+                    <h2>Potmusmeminf</h2>
+
+                    <p>dj_1: {{ teste.dj_1 }}</p>
+                    <p>dj_2: {{ teste.dj_2 }}</p>
+                    <p>dj_3: {{ teste.dj_3 }}</p>
+                    <p>sj_1: {{ teste.sj_1 }}</p>
+                    <p>sj_2: {{ teste.sj_2 }}</p>
+                    <p>sj_3: {{ teste.sj_3 }}</p>
+                    <p>cmj_1: {{ teste.cmj_1 }}</p>
+                    <p>cmj_2: {{ teste.cmj_2 }}</p>
+                    <p>cmj_3: {{ teste.cmj_3 }}</p>
+                               
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="calculospotmusmeminf" role="tabpanel" aria-labelledby="calculospotmusmeminf-tab">
+                
+                {% for teste in calculospotmusmeminf_avaliacoes %}
+
+                    <h2>Potmusmeminf Cálculos</h2>
+
+                    <p>cmj maior: {{ teste.cmj_maior }}</p>
+                    <p>sj maior: {{ teste.sj_maior }}</p>
+                    <p>dj maior: {{ teste.dj_maior }}</p>
+                    <p>indice força reativa: {{ teste.indice_fr }}</p>
+                    
+                   
+                               
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="rast" role="tabpanel" aria-labelledby="rast-tab">
+                
+                {% for teste in rast_avaliacoes %}
+
+                    <h2>Rast</h2>
+
+                    <p>estimulo_1: {{ teste.estimulo_1 }}</p>
+                    <p>estimulo_2: {{ teste.estimulo_2 }}</p>
+                    <p>estimulo_3: {{ teste.estimulo_3 }}</p>
+                    <p>estimulo_4: {{ teste.estimulo_4 }}</p>
+                    <p>estimulo_5: {{ teste.estimulo_5 }}</p>
+                    <p>estimulo_6: {{ teste.estimulo_6 }}</p>
+
+                {% endfor %}
+            </div>
+
+             <div class="tab-pane fade" id="calculorast" role="tabpanel" aria-labelledby="calculorast-tab">
+                
+                {% for teste in calculorast_avaliacoes %}
+
+                    <h2>Rast Cálculos</h2>
+
+                    <p>Potência anaeróbica: {{ teste.potanaerobia }}</p>
+                    <p>Capacidade anaeróbica: {{ teste.capanaerobia }}</p>
+                    <p>Índice de fadiga: {{ teste.indfadiga }}</p>
+
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="runmatic" role="tabpanel" aria-labelledby="runmatic-tab">
+                
+                {% for teste in runmatic_avaliacoes %}
+
+                    <h2>Runmatic</h2>
+
+                    <p>tcontatoesq: {{ teste.tcontatoesq }}</p>
+                    <p>tcontatodir: {{ teste.tcontatodir }}</p>
+                    <p>tvooesq: {{ teste.tvooesq }}</p>
+                    <p>tvoodir: {{ teste.tvoodir }}</p>
+                    <p>freqpassadaesq: {{ teste.freqpassadaesq }}</p>
+                    <p>freqpassadadir: {{ teste.freqpassadadir }}</p>
+                    <p>osverticalesq: {{ teste.osverticalesq }}</p>
+                    <p>osverticaldir: {{ teste.osverticaldir }}</p>
+                    <p>stifnessesq: {{ teste.stifnessesq }}</p>
+                    <p>stifnessdir: {{ teste.stifnessdir }}</p>
+                    <p>fmaximaesq: {{ teste.fmaximaesq }}</p>
+                    <p>fmaximadir: {{ teste.fmaximadir }}</p>
+                
+                {% endfor %}
+            </div>
+
+            <div class="tab-pane fade" id="assimetriarunmatic" role="tabpanel" aria-labelledby="assimetriarunmatic-tab">
+                
+                {% for teste in assimetriarunmatic_avaliacoes %}
+
+                    <h2>Runmatic</h2>
+
+                    <p>Tempo de contato (assimetria): {{ teste.tcontato }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testcadextensora" role="tabpanel" aria-labelledby="testcadextensora-tab">
+                
+                {% for teste in testcadextensora_avaliacoes %}
+
+                    <h2>Teste cadeira Extensora</h2>
+
+                    <p>direito: {{ teste.direito }}</p>
+                    <p>esquerdo: {{ teste.esquerdo }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testey" role="tabpanel" aria-labelledby="testey-tab">
+                
+                {% for teste in testey_avaliacoes %}
+
+                    <h2>Teste Y</h2>
+
+                    <p>anterior_direito_1: {{ teste.anterior_direito_1 }}</p>
+                    <p>anterior_direito_2: {{ teste.anterior_direito_2 }}</p>
+                    <p>anterior_direito_3: {{ teste.anterior_direito_3 }}</p>
+                    <p>anterior_esquerdo_1: {{ teste.anterior_esquerdo_1 }}</p>
+                    <p>anterior_esquerdo_2: {{ teste.anterior_esquerdo_2 }}</p>
+                    <p>anterior_esquerdo_3: {{ teste.anterior_esquerdo_3 }}</p>
+                    <p>postero_medial_dir_1: {{ teste.postero_medial_dir_1 }}</p>
+                    <p>postero_medial_dir_2: {{ teste.postero_medial_dir_2 }}</p>
+                    <p>postero_medial_dir_3: {{ teste.postero_medial_dir_3 }}</p>
+                    <p>postero_medial_esq_1: {{ teste.postero_medial_esq_1 }}</p>
+                    <p>postero_medial_esq_2: {{ teste.postero_medial_esq_2 }}</p>
+                    <p>postero_medial_esq_3: {{ teste.postero_medial_esq_3 }}</p>
+                    <p>postero_lat_esq_1: {{ teste.postero_lat_esq_1 }}</p>
+                    <p>postero_lat_esq_2: {{ teste.postero_lat_esq_2 }}</p>
+                    <p>postero_lat_esq_3: {{ teste.postero_lat_esq_3 }}</p>
+                    <p>postero_lat_dir_1: {{ teste.postero_lat_dir_1 }}</p>
+                    <p>postero_lat_dir_2: {{ teste.postero_lat_dir_2 }}</p>
+                    <p>postero_lat_dir_3: {{ teste.postero_lat_dir_3 }}</p>
+                
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testmuscular" role="tabpanel" aria-labelledby="testmuscular-tab">
+                
+                {% for teste in testmuscular_avaliacoes %}
+
+                    <h2>Teste muscular</h2>
+
+                    <p>abduquadrildir: {{ teste.abduquadrildir }}</p>
+                    <p>abduquadrilesq: {{ teste.abduquadrilesq }}</p>
+                    <p>rotquadrildir: {{ teste.rotquadrildir }}</p>
+                    <p>rotquadrilesq: {{ teste.rotquadrilesq }}</p>
+                    <p>flexplantardir: {{ teste.flexplantardir }}</p>
+                    <p>flexplantaresq: {{ teste.flexplantaresq }}</p>
+                    <p>flexjoelhodir: {{ teste.flexjoelhodir }}</p>
+                    <p>flexjoelhoesq: {{ teste.flexjoelhoesq }}</p>
+                    <p>exjoelhodir: {{ teste.exjoelhodir }}</p>
+                    <p>exjoelhoesq: {{ teste.exjoelhoesq }}</p>
+                
+
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testober" role="tabpanel" aria-labelledby="testober-tab">
+                
+                {% for teste in testober_avaliacoes %}
+
+                    <h2>Teste Ober</h2>
+
+                    <p>direito: {{ teste.direito }}</p>
+                    <p>esquerdo: {{ teste.esquerdo }}</p>
+                
+
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testprogmaximo" role="tabpanel" aria-labelledby="testprogmaximo-tab">
+                
+                {% for teste in testprogmaximo_avaliacoes %}
+
+                    <h2>Testprogmaximo</h2>
+
+                    <p>ultestatingido: {{ teste.ultestatingido }}</p>
+                
+
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testquedapelvica" role="tabpanel" aria-labelledby="testquedapelvica-tab">
+                
+                {% for teste in testquedapelvica_avaliacoes %}
+
+                    <h2>Teste queda pelvica</h2>
+
+
+                    <p>direito: {{ teste.direito }}</p>
+                    <p>esquerdo: {{ teste.esquerdo }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testsalto" role="tabpanel" aria-labelledby="testsalto-tab">
+                
+               {% for teste in testsalto_avaliacoes %}
+
+                    <h2>Teste salto</h2>
+
+                    <p>direito: {{ teste.direito }}</p>
+                    <p>esquerdo: {{ teste.esquerdo }}</p>
+                
+                {% endfor %}
+            </div>
+
+
+            <div class="tab-pane fade" id="testthomas" role="tabpanel" aria-labelledby="testthomas-tab">
+                
+                {% for teste in testthomas_avaliacoes %}
+
+                    <h2>Teste Thomas</h2>
+
+                    <p>iliopsoasdir: {{ teste.iliopsoasdir }}</p>
+                    <p>iliopsoasesq: {{ teste.iliopsoasesq }}</p>
+                    <p>retofemoraldir: {{ teste.retofemoraldir }}</p>
+                    <p>retofemuralesq: {{ teste.retofemuralesq }}</p>
+                
+
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <br><br>
+        <div class="container">
+            <a href="{% url 'home_teste' %}" button type="button" class="btn btn-warning">Sair</button></a>
+        </div> 
+        <br><br>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar antropometria {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_antropometria' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Massacorporal (kg)</label>
+                        <input name ="massacorporal" class="form-control" type="text" placeholder="massacorporal..."></label><br>
+
+                        <label>Altura (cm)</label>
+                        <input name ="altura" class="form-control" type="text" placeholder="altura..."></label><br>
+
+                        <label>Dctriceps (mm)</label>
+                        <input name ="dctriceps" class="form-control" type="text" placeholder="dctriceps..."></label><br>
+                        
+                        <label>Dcabdominal (mm)</label>
+                        <input name ="dcabdominal" class="form-control" type="text" placeholder="dcabdominal..."></label><br>
+                        
+                        <label>Dcpanturrilha (mm)</label>
+                        <input name ="dcpanturrilha" class="form-control" type="text" placeholder="dcpanturrilha..."></label><br>
+                        
+                        <label>Dcsubescapular (mm)</label>
+                        <input name ="dcsubescapular" class="form-control" type="text" placeholder="dcsubescapular..."></label><br>
+                        
+                        <label>Circcoxamedial (cm)</label>
+                        <input name ="circcoxamedial" class="form-control" type="text" placeholder="circcoxamedial..."></label><br>
+                        
+                        <label>Circpanturmedial (cm)</label>
+                        <input name ="circpanturmedial" class="form-control" type="text" placeholder="circpanturmedial..."></label><br>
+                        
+                        <label>Dcbiceps (mm)</label>
+                        <input name ="dcbiceps" class="form-control" type="text" placeholder="dcbiceps..."></label><br>
+                        
+                        <label>Dcpeitoral (mm)</label>
+                        <input name ="dcpeitoral" class="form-control" type="text" placeholder="dcpeitoral..."></label><br>
+                        
+                        <label>Dccoxamedial (mm)</label>
+                        <input name ="dccoxamedial" class="form-control" type="text" placeholder="dccoxamedial..."></label><br>
+                        
+                        <label>Dcsuprailiaca (mm)</label>
+                        <input name ="dcsuprailiaca" class="form-control" type="text" placeholder="dcsuprailiaca..."></label><br>
+                        
+                        <label>Dccoxaproximal (mm)</label>
+                        <input name ="dccoxaproximal" class="form-control" type="text" placeholder="dccoxaproximal..."></label><br>
+                        
+                        <label>Dcmedioaxilar (mm)</label>
+                        <input name ="dcmedioaxilar" class="form-control" type="text" placeholder="dcmedioaxilar..."></label><br>
+
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_antropometria' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

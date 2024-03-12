@@ -1,0 +1,330 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+ 
+{% block 'titulo' %}Dashboard - Atleta{% endblock%}
+
+{% block 'head' %}
+
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+
+{% endblock%}
+
+
+{% block 'conteudo' %}
+    <br><br>
+    <div class="container">
+        <br>
+        <div class="row">
+
+            <div  class="col-md informacoes_basicas">
+                
+                <h1> <svg class="icone" xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16">
+                    <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                </svg> &nbsp Consultas: &nbsp<span id="consultas_total"></span></h1> 
+                
+            </div>
+
+            <div class="col-md informacoes_basicas">
+                <h1><svg style="color: #69BDCB;" class="icone" xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                    <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                </svg> &nbsp Testes: &nbsp<span id="testes_total"></span></h1> 
+            </div>
+            
+            <div class="col-md informacoes_basicas">
+                <h3>&nbsp {{atleta.nome}} </h3> 
+            </div>
+        
+        </div>
+
+
+        <div class="row">
+
+            {% if tem_avaliacao_angpopliteo %}
+                <div class="col-md">
+                    <br>
+                    <h1>Angpopliteo:</h1>
+                    <canvas class="grafico" id="angpopliteo_mensal" width="250" height="230"></canvas>
+                </div>
+            {% else %}
+                <canvas id="angpopliteo_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_antropometria %}
+                <div class="col-md">
+                    <br>
+                    <h1>Antropometria:</h1>
+                    <canvas class="grafico" id="antropometria_mensal" width="250" height="230"></canvas>
+                </div>
+            {% else %}
+                <canvas id="antropometria_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_calculoantropometria %}
+                <div class="col-md">
+                    <br>
+                    <h1>Antropometria Cálculos:</h1>
+                    <canvas class="grafico" id="calculoantropometria_mensal" width="250" height="230"></canvas>
+                </div>
+            {% else %}
+                <canvas id="calculoantropometria_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_compmembinf %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Compmembinf:</h1>
+                    <canvas class="grafico" id="compmembinf_mensal" width="250" height="230"></canvas>
+                </div>
+            {% else %}
+                <canvas id="compmembinf_mensal" width="250" height="200"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_corrida %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Corrida:</h1>
+                    <canvas class="grafico" id="corrida_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="corrida_mensal" width="250" height="200"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_desvam %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Desvam:</h1>
+                    <canvas class="grafico" id="desvam_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="desvam_mensal" width="250" height="200"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_desempenhodesvam %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Desvam Desempenho:</h1>
+                    <canvas class="grafico" id="desempenhodesvam_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="desempenhodesvam_mensal" width="250" height="200"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_dorsiflexao %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Dorsiflexao:</h1>
+                    <canvas class="grafico" id="dorsiflexao_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="dorsiflexao_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_flexibilidade %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Flexibilidade:</h1>
+                    <canvas class="grafico" id="flexibilidade_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="flexibilidade_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_maiorwellsflexibilidade %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Flexibilidade Maior Wells:</h1>
+                    <canvas class="grafico" id="maiorwellsflexibilidade_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="maiorwellsflexibilidade_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_fundtecnico %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Fundtecnico:</h1>
+                    <canvas class="grafico" id="fundtecnico_mensal" width="250" height="260"></canvas>
+                </div>
+            {% else %}
+                <canvas id="fundtecnico_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_potmusmeminf %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Potmusmeminf:</h1>
+                    <canvas class="grafico" id="potmusmeminf_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="potmusmeminf_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_calculospotmusmeminf %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Potmusmeminf Cálculos:</h1>
+                    <canvas class="grafico" id="calculopotmusmeminf_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="calculopotmusmeminf_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_rast %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Rast:</h1>
+                    <canvas class="grafico" id="rast_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="rast_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_calculorast %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Rast Cálculos:</h1>
+                    <canvas class="grafico" id="calculorast_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="calculorast_mensal" width="250" height="230"></canvas>
+            {% endif %}
+            
+            {% if tem_avaliacao_runmatic %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Runmatic:</h1>
+                    <canvas class="grafico" id="runmatic_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="runmatic_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_assimetriarunmatic %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Runmatic Assimetria:</h1>
+                    <canvas class="grafico" id="assimetriarunmatic_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="assimetriarunmatic_mensal" width="250" height="230"></canvas>
+            {% endif %}
+            
+            {% if tem_avaliacao_testcadextensora %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Testcadextensora:</h1>
+                    <canvas class="grafico" id="testcadextensora_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="testcadextensora_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_testey %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Teste Y:</h1>
+                    <canvas class="grafico" id="testey_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="testey_mensal" width="250" height="230"></canvas>
+            {% endif %}
+            
+            {% if tem_avaliacao_testmuscular %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Testmuscular:</h1>
+                    <canvas class="grafico" id="testmuscular_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="testmuscular_mensal" width="250" height="230"></canvas>
+            {% endif %}
+            
+            {% if tem_avaliacao_testprogmaximo %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Testprogmaximo:</h1>
+                    <canvas class="grafico" id="testprogmaximo_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="testprogmaximo_mensal" width="250" height="230"></canvas>
+            {% endif %}
+
+            {% if tem_avaliacao_testsalto %}
+                <div class="col-md">
+                    <br>
+
+                    <h1>Testsalto:</h1>
+                    <canvas class="grafico" id="testsalto_mensal" width="250" height="200"></canvas>
+                </div>
+            {% else %}
+                <canvas id="testsalto_mensal" width="250" height="230"></canvas>
+            {% endif %}
+            
+        </div>
+
+
+        <div class="row">
+            
+          
+
+        </div>
+
+        <br>
+    </div>
+    <br>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/js.js' %}"></script>
+
+
+    <script>
+        window.onload = function(e){
+
+            renderiza_total_consultas_atleta('{% url "retorna_total_consultas_atleta" atleta_id %}')
+            renderiza_total_testes_atleta('{% url "retorna_total_testes_atleta" atleta_id %}')
+            renderiza_angpopliteo_mensal('{% url "relatorio_angpopliteo_atleta" atleta_id %}')
+            renderiza_antropometria_mensal('{% url "relatorio_antropometria_atleta" atleta_id %}')
+            renderiza_calculoantropometria_mensal('{% url "relatorio_calculoantropometria_atleta" atleta_id %}')
+            renderiza_compmembinf_mensal('{% url "relatorio_compmembinf_atleta" atleta_id %}')
+            renderiza_corrida_mensal('{% url "relatorio_corrida_atleta" atleta_id %}')
+            renderiza_desvam_mensal('{% url "relatorio_desvam_atleta" atleta_id %}')
+            renderiza_desempenhodesvam_mensal('{% url "relatorio_desempenhodesvam_atleta" atleta_id %}')
+            renderiza_dorsiflexao_mensal('{% url "relatorio_dorsiflexao_atleta" atleta_id %}')
+            renderiza_flexibilidade_mensal('{% url "relatorio_flexibilidade_atleta" atleta_id %}')
+            renderiza_maiorwellsflexibilidade_mensal('{% url "relatorio_maiorwellsflexibilidade_atleta" atleta_id %}')
+            renderiza_fundtecnico_mensal('{% url "relatorio_fundtecnico_atleta" atleta_id %}')
+            renderiza_potmusmeminf_mensal('{% url "relatorio_potmusmeminf_atleta" atleta_id %}')
+            renderiza_calculospotmusmeminf_mensal('{% url "relatorio_calculospotmusmeminf_atleta" atleta_id %}')
+            renderiza_rast_mensal('{% url "relatorio_rast_atleta" atleta_id %}')
+            renderiza_calculorast_mensal('{% url "relatorio_calculorast_atleta" atleta_id %}')
+            renderiza_runmatic_mensal('{% url "relatorio_runmatic_atleta" atleta_id %}')
+            renderiza_assimetriarunmatic_mensal('{% url "relatorio_assimetriarunmatic_atleta" atleta_id %}')
+            renderiza_testcadextensora_mensal('{% url "relatorio_testcadextensora_atleta" atleta_id %}')
+            renderiza_testey_mensal('{% url "relatorio_testey_atleta" atleta_id %}')
+            renderiza_testmuscular_mensal('{% url "relatorio_testmuscular_atleta" atleta_id %}')
+            renderiza_testprogmaximo_mensal('{% url "relatorio_testprogmaximo_atleta" atleta_id %}')
+            renderiza_testsalto_mensal('{% url "relatorio_testsalto_atleta" atleta_id %}')
+            
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar compmembinf {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_compmembinf' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Direito (cm)</label>
+                        <input name ="direito" class="form-control" type="text" placeholder="direito..."></label><br>
+                        <label>Esquerdo (cm)</label>
+                        <input name ="esquerdo" class="form-control" type="text" placeholder="esquerdo..."></label><br>
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_compmembinf' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

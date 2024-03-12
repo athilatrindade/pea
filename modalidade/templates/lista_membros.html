@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Membros da modalidade {% endblock %}
+
+{% block 'conteudo' %}
+<br><br><br>
+
+<div class="container">
+    <h1>Modalidade: {{ modalidade.nome }}</h1>
+
+    <div class="list-group">
+        {% if membros_da_modalidade %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Atleta</th>
+                        <th scope="col">Cadastro</th>
+                    </tr>
+                </thead>
+                {% for membro in membros_da_modalidade %}
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{ membro.atleta.id }}</th>
+                            <td>{{ membro.atleta.nome }}</td>
+                            <td><a href="{% url 'editar_atleta' membro.atleta.id %}" button type="button" class="btn btn-success btn-md">Editar</a></button></td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+                <tbody>
+                    <tr>
+                        <td colspan="5"><a href="{% url 'lista_modalidade' %}" button type="button" class="btn btn-info btn-md">Voltar</a></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <p>Não há atletas nesta modalidade</p>
+            <a href="{% url 'lista_modalidade' %}" button type="button" class="btn btn-info">Voltar</a></button>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

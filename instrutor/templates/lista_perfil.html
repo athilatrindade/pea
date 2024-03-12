@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Perfis {% endblock %}
+
+{% block 'conteudo' %}
+    <br><br><br>
+
+    <div class="container">
+        <h1>Perfis de Instrutores</h1>
+
+        <div class="list-group">      
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Perfis</th>
+                        <th scope="col">Qtd. Instrutor</th>
+                        <th scope="col">Cadastro</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for perfil, qtd_instrutor in perfis_com_qtd_instrutor %}
+                        <tr>
+                            <th scope="row">{{perfil.id}}</th>
+                            <td>{{perfil.nome}}</td>
+                            
+                            <td><a href="{% url 'lista_membros_perfil' perfil.id %}" class="text-dark">{{qtd_instrutor}}</a></button></td>
+                            <td><a href="{% url 'editar_perfil' perfil.id %}" button type="button" class="btn btn-success btn-md">Editar</a></button></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="4"><a href="/instrutor/cadastrar_perfil/" button type="button" class="btn btn-info btn-md">Cadastrar</a></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+    </div> 
+
+{% endblock %}

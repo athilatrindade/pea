@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Editar modalidade {% endblock %}
+
+{% block 'conteudo' %}
+
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Alteração realizada com sucesso.
+            </div>
+        {% endif %}
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Erro de sistema
+            </div>
+        {% endif %}
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Erro de sistema
+            </div>
+        {% endif %}
+        {% if status == '3' %}
+            <div class="alert alert-danger" role="alert">
+                Já existe uma modalidade com esse código
+            </div>
+        {% endif %}
+        {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Já existe uma modalidade com esse nome
+            </div>
+        {% endif %}
+        {% if status == '5' %}
+            <div class="alert alert-danger" role="alert">
+                Modalidade não pode ser alterada pois esta atrelada a um ou mais atletas.
+            </div>
+        {% endif %}
+        <div class ="row">
+            <div class ="col-md-3">
+            
+            </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_edicao_modalidade' modalidade.id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                    
+
+
+                        <input type="hidden" value="{{modalidade.id}}" name="modalidade_id">
+
+                        <label>Código</label>
+                        <input name ="codigo" class="form-control" type="text" value="{{modalidade.codigo}}"></label><br>
+                        
+                        <label>Nome</label>
+                        <input name ="nome" class="form-control" type="text" value="{{modalidade.nome}}"></label><br>
+
+                        <br><br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'lista_modalidade' %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+        
+                    </form>
+
+
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+    <br>
+
+
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar usuário {% endblock %}
+
+{% block 'conteudo' %}
+
+    
+
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+        {% endif %}
+
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Nome e email não podem estar em branco
+            </div>
+        {% endif %}
+
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Sua senha deve ter pelo menos 8 caracteres
+            </div>
+        {% endif %}
+
+        {% if status == '3' %}
+            <div class="alert alert-danger" role="alert">
+                Usuário já existe no sistema
+            </div>
+        {% endif %}
+
+        {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Erro interno do sistema
+            </div>
+        {% endif %}
+        {% if status == '5' %}
+            <div class="alert alert-danger" role="alert">
+                CPF inválido
+            </div>
+        {% endif %}
+        {% if status == '6' %}
+            <div class="alert alert-danger" role="alert">
+                Email inválido
+            </div>
+        {% endif %}
+        {% if status == '7' %}
+            <div class="alert alert-danger" role="alert">
+                Já existe usuário cadastrado com esse CPF
+            </div>
+        {% endif %}
+        {% if status == '8' %}
+            <div class="alert alert-danger" role="alert">
+                Já existe usuário cadastrado com esse email.
+            </div>
+        {% endif %}
+        {% if status == '9' %}
+            <div class="alert alert-danger" role="alert">
+                Instrutor já vinculado a outro usuário.
+            </div>
+        {% endif %}
+        <div class ="row">
+            <div class ="col-md-3">
+        
+            </div>
+            <div class ="col-md-6">
+                <form action="{% url 'valida_cadastro_usuario' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    
+                    <input type="hidden" value="{{usuario.id}}" name="id_usuario">
+
+                    <label>Nome</label>
+                    <input name ="nome" class="form-control" type="text" placeholder="Nome..."></label><br>
+                    <label>CPF</label>
+                    <input name ="cpf" class="form-control" type="text" placeholder="CPF..."></label><br>
+                    <label>Email</label>
+                    <input name ="email" class="form-control" type="email" placeholder="Email..."></label><br>
+                    <label>Telefone</label>
+                    <input name ="telefone" class="form-control" type="text" placeholder="Telefone..."></label><br>
+                    <label>Senha (Deve conter no mínimo 8 caracteres)</label>
+                    <input name ="senha" class="form-control" type="password" placeholder="Senha..."></label><br>
+                    <label>Situação</label>
+                    <div class="form-check">
+                        <input name = "ativado" class="form-check-input" type="radio" value= "True" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          Ativo
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input name = "ativado" class="form-check-input" type="radio" value = "False" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                          Inativo
+                        </label>
+                    </div>
+                    <br>
+                    
+                   {% if usuario.administrador == True %}
+                        <div class="form-check">
+                            <input name = "administrador" class="form-check-input" type="checkbox" value= "True" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            Administrador
+                            </label>
+                        </div>
+                        <input type="hidden" name="administrador" value="False">
+                        
+                    {% else %}
+                        <div class="form-check">
+                            <input name = "administrador" class="form-check-input" type="checkbox" value= "False" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            Administrador
+                            </label>
+                        </div>
+                        <!-- Campo hidden para representar o valor "False" -->
+                        <input type="hidden" name="administrador" value="False">
+                    {% endif %} 
+                    
+                    <br>
+
+                    <label for="instrutor">Instrutor:</label>
+                    <select name="instrutor" id="instrutor" class="form-control">
+                        {% for instrutor in instrutores %}
+                            <option value="{{ instrutor.id }}">{{ instrutor.nome }}</option>
+                        {% endfor %}
+                    </select>
+
+
+                    <br>
+
+                    
+                    <br><br>
+                    <input type="submit" class="btn btn-success" value="Gravar">
+                    <a href="/usuario/home" button type="button" class="btn btn-warning">Sair</button></a>
+
+
+                </form>
+
+                <br>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+
+{% endblock %}

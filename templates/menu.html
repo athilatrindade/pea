@@ -1,0 +1,57 @@
+{% block content %}
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <div class="container">
+
+        <a href="{% url 'home' %}" class="navbar-brand">
+          <img src="#" width="142" alt="PEA">
+        </a>
+
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="nav-principal" class="collapse navbar-collapse">
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Cadastro
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'cadastrar_atleta' %}">Atleta</a>
+                <a class="dropdown-item" href="{% url 'cadastrar_modalidade' %}">Modalidade</a>
+                <a class="dropdown-item" href="{% url 'cadastrar_perfil' %}">Perfil</a> 
+                <a class="dropdown-item" href="{% url 'cadastrar_instrutor' %}">Instrutor</a>
+                <a class="dropdown-item" href="{% url 'cadastrar_usuario' %}">Usuário</a>
+                
+                
+
+              </div>
+            </li> 
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'sair' %}">Finalizar sessão</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="http://127.0.0.1:8000/admin" target="_blank">Admin</a>
+            </li>
+            
+
+            <li class="nav-item">
+              <a href="{% url 'login' %}" class="btn btn-outline-light ml-4">Entrar</a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+  </nav>
+  <br> 
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar Teste muscular {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_testmuscular' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Abduquadrildir (newtons)</label>
+                        <input name="abduquadrildir" class="form-control" type="text" placeholder="abduquadrildir..."></label><br>
+                        
+                        <label>Abduquadrilesq (newtons)</label>
+                        <input name="abduquadrilesq" class="form-control" type="text" placeholder="abduquadrilesq..."></label><br>
+
+                        <label>Rotquadrildir (newtons)</label>
+                        <input name="rotquadrildir" class="form-control" type="text" placeholder="rotquadrildir..."></label><br>
+
+                        <label>Rotquadrilesq (newtons)</label>
+                        <input name="rotquadrilesq" class="form-control" type="text" placeholder="rotquadrilesq..."></label><br>
+
+                        <label>Flexplantardir (n° de repetiçes)</label>
+                        <input name="flexplantardir" class="form-control" type="text" placeholder="flexplantardir..."></label><br>
+
+                        <label>Flexplantaresq (n° de repetiçes)</label>
+                        <input name="flexplantaresq" class="form-control" type="text" placeholder="flexplantaresq..."></label><br>
+
+                        <label>Flexjoelhodir (newtons)</label>
+                        <input name="flexjoelhodir" class="form-control" type="text" placeholder="flexjoelhodir..."></label><br>
+
+                        <label>Postero_medial_dir_2 (newtons)</label>
+                        <input name="postero_medial_dir_2" class="form-control" type="text" placeholder="postero_medial_dir_2..."></label><br>
+
+                        <label>Flexjoelhoesq (newtons)</label>
+                        <input name="flexjoelhoesq" class="form-control" type="text" placeholder="flexjoelhoesq..."></label><br>
+
+                        <label>Exjoelhodir (newtons)</label>
+                        <input name="exjoelhodir" class="form-control" type="text" placeholder="exjoelhodir..."></label><br>
+
+                        <label>Exjoelhoesq (newtons)</label>
+                        <input name="exjoelhoesq" class="form-control" type="text" placeholder="exjoelhoesq..."></label><br>
+
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_testmuscular' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}

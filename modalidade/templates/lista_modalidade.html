@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Modalidades {% endblock %}
+
+{% block 'conteudo' %}
+<br><br><br>
+
+
+
+<div class="container">
+    <h1>Modalidades</h1>
+
+    <div class="list-group">      
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Modalidade</th>
+                <th scope="col">Qtd. Atletas</th>
+                <th scope="col">Editar modalidade</th>
+                <th scope="col">Incluir/Excluir Atleta</th>
+                </tr>
+            </thead>
+            
+            
+
+            {% for modalidade, qtd_atletas in modalidades_com_qtd_atletas %}
+                <tr>
+                    <th scope="row">{{ modalidade.id }}</th>
+                    <td>{{ modalidade.nome }}</td>
+                    
+                    <td><a href="{% url 'lista_membros' modalidade.id %}" class="text-dark" >{{ qtd_atletas }}</a></button></td>
+                    <td><a href="{% url 'editar_modalidade' modalidade.id %}" button type="button" class="btn btn-success btn-md">Editar</a></button></td>
+                    <td><a href="{% url 'lista_atletas' modalidade.id %}" button type="button" class="btn btn-success btn-md">Gerenciar</a></button></td>
+                </tr>
+            {% endfor %}
+            <tbody>
+                <tr>
+                    <td colspan="5" ><a href="/modalidade/cadastrar/" button type="button" class="btn btn-info btn-md">Cadastrar</a></button></td>
+                </tr>
+            </tbody>
+            
+        </table>
+          
+        <br>  
+      
+    </div>
+    <br>
+
+</div> 
+
+{% endblock %}

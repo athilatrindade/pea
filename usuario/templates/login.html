@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Login {% endblock %}
+
+{% block 'conteudo' %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Email ou senha inválidos
+            </div>
+        {%endif %}
+
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Faça login para acessar o sistema
+            </div>
+        {%endif %}
+
+        <div class ="row">
+            <div class ="col-md-3">
+        
+            </div>
+            <div class ="col-md-6">
+                <form  method="POST" action="{% url 'valida_login_usuario' %}" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    
+                    
+                    <input type="hidden" value="{{usuario.id}}" name="id_usuario">
+                
+                    <h1>Login</h1>
+                    <br>
+                    <label>Usuário</label>
+                    <input class="form-control" name ="email" type="text" placeholder="Email..."></label><br><br>
+                    
+                    <label>Senha</label>
+                    <input class="form-control" name ="senha" type="password" placeholder="Senha..."></label><br>
+                    
+                    <br>
+                    <input type="submit" class="btn btn-success" value="Gravar">
+                    <a href="#" button type="button" class="btn btn-warning">Sair</button></a>
+
+
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+
+{%endblock %}

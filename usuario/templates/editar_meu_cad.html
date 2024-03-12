@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %} Editar cadastro {% endblock %}
+
+{% block 'conteudo' %}
+
+    <br>
+    <br>
+    
+    <br>
+    <div class="container">
+        <h3>Editar cadastro</h3>
+        <div class ="row">
+            <div class ="col-md-3">
+            
+            </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'editar_meu_cad' usuario.id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+
+                        <input type="hidden" value="{{usuario.id}}" name="usuario_id">
+                    
+                        
+
+                        <label>Nome</label>
+                        <input name ="nome" class="form-control" type="text" value="{{usuario.nome}}" readonly></label><br>
+                        <label>CPF</label>
+                        <input name ="cpf" class="form-control" type="text" value="{{usuario.cpf}}" readonly></label><br>
+                        <label>Email</label>
+                        <input name ="email" class="form-control" type="email" value="{{usuario.email}}" readonly></label><br>
+                        <label>Telefone</label>
+                        <input name ="telefone" class="form-control" type="text" value="{{usuario.telefone}}"></label><br>
+                        <label>Senha (Deve conter no mínimo 8 caracteres)</label>
+                        <input name ="senha" class="form-control" type="password" value="{{usuario.senha}}"></label><br>
+                        
+                        <label>Situação</label>
+                        <input name ="ativado" class="form-control" type="text" value="{{usuario.ativado}}" readonly></label><br>
+                        
+                        
+                        <label>Administrador</label>
+                        <input name ="administrador" class="form-control" type="text" value="{{usuario.administrador}}" readonly></label><br>
+                        
+                        
+                        <br>
+                        
+                        <label>Instrutor</label>
+                        <input name ="instrutor" class="form-control" type="text" value="{{usuario.instrutor.id}}" readonly></label><br>
+                        <br>
+                        
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="/usuario/home/" button type="button" class="btn btn-warning">Sair</button></a>
+
+            
+                    </form>
+
+                    <br>
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+    <br>
+
+
+{% endblock %}

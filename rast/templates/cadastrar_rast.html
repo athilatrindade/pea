@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Cadastrar rast {% endblock %}
+
+{% block 'conteudo' %}
+
+{% if status == '0' %}
+    <div class="alert alert-success" role="alert">
+        Teste gravado com sucesso.
+    </div>
+{% endif %}
+
+{% if status == '1' %}
+    <div class="alert alert-danger" role="alert">
+    Erro ao gravar teste
+</div>
+{% endif %}
+    <br>
+    <br>
+    <br>
+    <body>
+        <div class="container">
+        
+            <div class ="row">
+                <div class ="col-md-3">
+            
+                </div>
+                <div class ="col-md-6">
+                    <form action="{% url 'valida_rast' modalidade_id atleta.id teste_id %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                         
+                        
+                        <input type="hidden" value="{{modalidade.id}}" name="id_modalidade">
+                        <input type="hidden" value="{{atleta.id}}" name="id_atleta">
+
+                        <label>Estimulo_1 (segundos)</label>
+                        <input name="estimulo_1" class="form-control" type="text" placeholder="estimulo_1..."></label><br>
+                        
+                        <label>Estimulo_2 (segundos)</label>
+                        <input name="estimulo_2" class="form-control" type="text" placeholder="estimulo_2..."></label><br>
+                        
+                        <label>Estimulo_3 (segundos)</label>
+                        <input name="estimulo_3" class="form-control" type="text" placeholder="estimulo_3..."></label><br>
+                        
+
+                        <label>Estimulo_4 (segundos)</label>
+                        <input name="estimulo_4" class="form-control" type="text" placeholder="estimulo_4..."></label><br>
+                        
+                        <label>Estimulo_5 (segundos)</label>
+                        <input name="estimulo_5" class="form-control" type="text" placeholder="estimulo_5..."></label><br>
+                        
+                        
+                        <label>estimulo_6 (segundos)</label>
+                        <input name="estimulo_6" class="form-control" type="text" placeholder="estimulo_6..."></label><br>
+                        
+                        <label>Teste</label>
+                        <input name ="teste" class="form-control" type="text" value="{{teste_id}}" readonly></label><br>
+
+                        <br>
+                        <input type="submit" class="btn btn-success" value="Gravar">
+                        <a href="{% url 'home_rast' modalidade_id atleta.id teste_id %}" button type="button" class="btn btn-warning">Sair</button></a>
+
+                        
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <br>
+    </body>
+
+{% endblock %}
