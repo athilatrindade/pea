@@ -168,11 +168,14 @@ def valida_edicao_atleta(request,id):
 
 @never_cache  
 def ver_atletas(request): 
-    atleta = Atleta.objects.filter().order_by('nome')
+    if request.session.get('usuario'):
+       atleta = Atleta.objects.filter().order_by('nome')
 
-    modalidades_atletas = Modalidades_atleta.objects.select_related('modalidade').order_by('atleta__nome')
+       modalidades_atletas = Modalidades_atleta.objects.select_related('modalidade').order_by('atleta__nome')
 
-    return render(request, 'lista_atleta.html', {'atleta': atleta, 'modalidades_atletas': modalidades_atletas})
+       return render(request, 'lista_atleta.html', {'atleta': atleta, 'modalidades_atletas': modalidades_atletas})
+    else:
+        return redirect('/usuario/login/') 
 
 
 def visualizar_atleta(request,id):

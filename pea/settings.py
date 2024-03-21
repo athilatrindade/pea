@@ -109,7 +109,7 @@ DATABASES = {
         'USER': 'ufvjm',
         'PASSWORD': 'ufvjm2023',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
