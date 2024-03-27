@@ -16,6 +16,8 @@ from atleta.models import Atleta
 from . import forms
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Max
+from django.views.decorators.cache import never_cache 
+
 
 def home_consulta(request,id):
     status = request.GET.get('status')
@@ -124,6 +126,7 @@ def editar_consulta(request, atleta_id, consulta_id):
     return redirect('/usuario/login/')
 
 def ver_consulta(request, atleta_id, consulta_id):
+    
     atleta = Atleta.objects.get(id=atleta_id)
     consultas = Consulta.objects.filter(atleta=atleta)
     
@@ -177,18 +180,22 @@ def historico_consulta(request,id):
 
     return render(request, 'historico_consulta.html', {'status': status, 'atleta' : atleta, 'consultas':consultas, 'usuario_logado':usuario_logado, 'sigilo':sigilo, 'instrutor_logado':instrutor_logado,'instrutor_relacionado':instrutor_relacionado})
 
+@never_cache
 def busca_atleta_consulta(request):
-    status = request.GET.get('status')
+    if request.session.get('usuario'):
+            usuario_id = request.session.get('usuario')
+            status = request.GET.get('status')
 
-    atletas = Atleta.objects.all().order_by('nome')
-    instrutores = Instrutor.objects.all()
+            atletas = Atleta.objects.all().order_by('nome')
+            instrutores = Instrutor.objects.all()
    
-    status = request.GET.get('status')
+            status = request.GET.get('status')
 
-    usuario = Usuario.objects.get(id=request.session['usuario'])
-    instrutor_relacionado = usuario.instrutor
+            usuario = Usuario.objects.get(id=request.session['usuario'])
+            instrutor_relacionado = usuario.instrutor
 
-    return render(request, 'busca_atleta.html', {'status': status,'atletas': atletas, 'instrutores': instrutores, 'instrutor_relacionado':instrutor_relacionado})
+            return render(request, 'busca_atleta.html', {'status': status,'atletas': atletas, 'instrutores': instrutores, 'instrutor_relacionado':instrutor_relacionado})
+    return redirect('/usuario/login/')
 
 def valida_edit_consulta(request, atleta_id, consulta_id):
 

@@ -435,10 +435,14 @@ def editar_meu_cad(request, id):
         return render(request, 'editar_meu_cad.html', imagens)
     return redirect('/usuario/login/')
 
+@never_cache
 def lista_usuario(request):
-    usuario = Usuario.objects.filter().order_by('nome')
+    if request.session.get('usuario'):
+            usuario_id = request.session.get('usuario')
+            usuario = Usuario.objects.filter().order_by('nome')
 
-    return render(request, 'lista_usuario.html', {'usuario': usuario})
+            return render(request, 'lista_usuario.html', {'usuario': usuario})
+    return redirect('/usuario/login/')
 
 
 

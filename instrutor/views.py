@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from datetime import date
 from instrutor.models import Instrutor, PerfilInstrutor
 from . forms import CadastroInstrutor
+from django.views.decorators.cache import never_cache 
+
 
 
 def cadastrar_instrutor(request):
@@ -220,21 +222,28 @@ def validar_edicao_perfil(request, id):
         
 
 
-
+@never_cache
 def lista_instrutor(request):
-    instrutor = Instrutor.objects.filter().order_by('nome')
+    if request.session.get('usuario'):
+            usuario_id = request.session.get('usuario')
+            instrutor = Instrutor.objects.filter().order_by('nome')
 
-    return render(request, 'lista_instrutor.html', {'instrutor': instrutor})
+            return render(request, 'lista_instrutor.html', {'instrutor': instrutor})
+    return redirect('/usuario/login/')        
 
+@never_cache
 def lista_perfil(request):
-    perfis = PerfilInstrutor.objects.all().order_by('nome')
-    perfis_com_qtd_instrutor = []
+    if request.session.get('usuario'):
+            usuario_id = request.session.get('usuario')
+            perfis = PerfilInstrutor.objects.all().order_by('nome')
+            perfis_com_qtd_instrutor = []
 
-    for perfil in perfis:
-        qtd_instrutor = Instrutor.objects.filter(perfil=perfil).count()
-        perfis_com_qtd_instrutor.append((perfil, qtd_instrutor))
+            for perfil in perfis:
+                qtd_instrutor = Instrutor.objects.filter(perfil=perfil).count()
+                perfis_com_qtd_instrutor.append((perfil, qtd_instrutor))
 
-    return render(request, 'lista_perfil.html', {'perfis_com_qtd_instrutor': perfis_com_qtd_instrutor})
+            return render(request, 'lista_perfil.html', {'perfis_com_qtd_instrutor': perfis_com_qtd_instrutor})
+    return redirect('/usuario/login/')        
 
 def lista_membros_perfil(request,id):
     

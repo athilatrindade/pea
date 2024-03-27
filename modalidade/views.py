@@ -14,6 +14,8 @@ from django.db.models import Count
 from django.http import HttpResponseRedirect
 from usuario.models import Usuario
 from django.db.models import Max
+from django.views.decorators.cache import never_cache 
+
 
 
 def cadastrar_modalidade(request):
@@ -116,19 +118,21 @@ def valida_edicao_modalidade(request,id):
 def excluir_modalidade(request, id):
     pass
 
-
+@never_cache
 def lista_modalidade(request):
+    if request.session.get('usuario'):
+            usuario_id = request.session.get('usuario')
+            modalidades = Modalidade.objects.all().order_by('nome')
+            modalidades_com_qtd_atletas = []
 
-    modalidades = Modalidade.objects.all().order_by('nome')
-    modalidades_com_qtd_atletas = []
-
-    for modalidade in modalidades:
-        qtd_atletas = Modalidades_atleta.objects.filter(modalidade=modalidade, ativo=True).count()
-        modalidades_com_qtd_atletas.append((modalidade, qtd_atletas))
+            for modalidade in modalidades:
+               qtd_atletas = Modalidades_atleta.objects.filter(modalidade=modalidade, ativo=True).count()
+               modalidades_com_qtd_atletas.append((modalidade, qtd_atletas))
 
 
 
-    return render(request, 'lista_modalidade.html', {'modalidades_com_qtd_atletas': modalidades_com_qtd_atletas})
+            return render(request, 'lista_modalidade.html', {'modalidades_com_qtd_atletas': modalidades_com_qtd_atletas})
+    return redirect('/usuario/login/')        
 
 
 def lista_membros(request,id):
